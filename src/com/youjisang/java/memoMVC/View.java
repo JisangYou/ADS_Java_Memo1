@@ -9,6 +9,11 @@ import java.util.Scanner;
  * @author pc
  *
  */
+/**
+ * 화면의 입출력을 담당하는 객체
+ * @author pc
+ *
+ */
 public class View {
 	// 스캐너 컨트롤러와 독립적으로 구성
 	Scanner scanner = new Scanner(System.in);

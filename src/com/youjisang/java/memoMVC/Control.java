@@ -10,10 +10,10 @@ import java.util.Scanner;
  */
 public class Control {
 	
-	Model model;
+	ModelWithDB model;
 	View view;
 	
-	public Control(Model model, View view){
+	public Control(ModelWithDB model, View view){
 		this.model = model;
 		this.view = view;
 	}

@@ -9,7 +9,7 @@ public class MemoMain {
 		ModelWithDB model = new ModelWithDB();
 		View view = new View();
 		
-//		Control control = new Control(model, view);
-//		control.process();
+		Control control = new Control(model, view);
+		control.process();
 	}
 }
