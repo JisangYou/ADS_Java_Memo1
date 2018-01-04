@@ -506,7 +506,7 @@ class scantutorial {
 - 스트림은 1차원적인 데이터의 흐름을 의미함.
 - 스트림은 흐름의 방향(입력스트림과 출력스트림)과 데이터의 형태(문자 스트림, 바이트 스트림)에 따라 다름
 
-[Stream](http://cfile1.uf.tistory.com/image/1755CE495038B2801DF78B)
+![Stream](http://cfile1.uf.tistory.com/image/1755CE495038B2801DF78B)
 
 - 파일입출력 부분은 일정한 틀이 있기에 예제코드로 대체
 
@@ -620,7 +620,8 @@ class FileTutorial {
 
 - Java Database Connectivity를 사용한 데이터베이스 연동
 - JDBC는 자바 프로그램과 관계형 데이터 원본에 대한 인터페이스이다. JDBC라이브러리는 관계형 데이터베이스에 접근하고, SQL 쿼리문을 실행하는 방법을 제공
-[JDBC 프로그램 작성단계](http://cfile27.uf.tistory.com/image/27669050526C94181B09CC) 
+
+![JDBC 프로그램 작성단계](http://cfile27.uf.tistory.com/image/27669050526C94181B09CC) 
 
 1. 1단계 (JDBC 드라이버 Load)
 
