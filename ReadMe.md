@@ -6,6 +6,7 @@
 - MVC패턴을 활용한 MEMO를 학습
 - File과 Database에 저장하는 것을 학습
 - 간단한 SQL문을 학습
+- 예외처리
 
 ## Code Review
 
@@ -430,13 +431,292 @@ public class MemoMain {
 
 ## 보충설명
 
+- mvc패턴으로 만들었음.
+- 일반적으로 게시판의 특성을 지닌 프로그램은 CRUD를 고려해서 만든다.
+- CRUD는 대부분의 컴퓨터 소프트웨어가 가지는 기본적인 데이터 처리 기능인 Create(생성), Read(읽기), Update(갱신), Delete(삭제)를 묶어서 일컫는 말이다. 사용자 인터페이스가 갖추어야 할 기능(정보의 참조/검색/갱신)을 가리키는 용어로서도 사용
+- mvc패턴으로 게시판의 특성을 가진 메모프로그램을 CRUD 방식으로 만들려고 했고, 관련 로직의 설명보다는 몰랐던 문법이나 함수등을 중점으로 설명할 것임(MEMO2에서 로직관련 부분을 다룰 것임.)
+
+### Console 입출력
+
+#### 츨력
+
+- System.out.println, System.out.print, System.out.printf -> 콘솔출력
+- %d(부호 o 10진수 정수),%o(부호 x 8진수 정수),%x(부호 x 16진수 정수) 등은 서식문자라고 함. 
+- 문자열 내에서 특별한 의미로 해석되는 문자들을 이스케이프 시퀀스라함 /n(다음줄로 넘어감), /t(수평 탭을 입력),/''(큰 따옴표를 입력)
+- 예제 코드
+
+```Java
+class Tutorial {
+
+  public static void main(String args[]) {
+
+    String name = "김철수";
+
+    int age = 14;
 
 
+
+    System.out.printf("안녕하세요. 제 이름은 %s 입니다.\n", name);
+
+    System.out.printf("나나\b이는 \"%d\"살 입니다.", age);
+
+  }
+
+}
+출처: http://blog.eairship.kr/124?category=431864 [누구나가 다 이해할 수 있는 프로그래밍 첫걸음]
+```
+- 결과
+>> 안녕하세요. 제 이름은 김철수 입니다.
+>> 나이는 "14"살 입니다.
+
+#### 입력
+
+- Scanner 클래스를 사용한다 
+- 예제 코드 
+```Java
+class scantutorial {
+
+  public static void main(String args[]) {
+
+    Scanner sc = new Scanner(System.in);
+
+    int data = sc.nextInt();
+
+    System.out.println("사용자가 입력한 데이터: " + data);
+  }
+}
+```
+
+#### 예외처리
+
+- 프로그램 실행 중 예외의 경우가 발생하여 비정상 종료가 되거나 잘 못 작동하는 상황을 말한다.
+- 이를 처리하기 위해 try~catch 사용함
+
+```Java
+	try{
+		예외가 발생할 위험이 있는 코드
+	}catch(예외타입 예외명){
+		예외를 처리하는 코드
+	}
+```
+- finally : 예외상황을 무시하고 반드시 실행되어야 하는 코드가 있을 경우에 필요한 영역,  throw : 강제로 예외를 발생시킬 수 있게 하는 특징, throws : 메소드 호출 시 예외를 발생시키고 싶을 경우에 사용됨.
+
+#### 파일 입출력
+
+- 스트림은 1차원적인 데이터의 흐름을 의미함.
+- 스트림은 흐름의 방향(입력스트림과 출력스트림)과 데이터의 형태(문자 스트림, 바이트 스트림)에 따라 다름
+
+[Stream](http://cfile1.uf.tistory.com/image/1755CE495038B2801DF78B)
+
+- 파일입출력 부분은 일정한 틀이 있기에 예제코드로 대체
+
+1. FileReader
+
+```Java
+class FileTutorial {
+
+	public static void main(String[] args) throws IOException {
+
+		// 예외가 발생하면 외부로 던져버림!
+
+		FileReader reader = new FileReader("c:\\test.txt");
+
+		int ch;
+
+		while((ch = reader.read()) != -1) { // 하나하나씩 받아오고 출력시킨다!
+
+			System.out.print((char)ch);
+
+		}
+
+		reader.close(); // 스트림을 다 썼으면 닫아주어야 한다.
+
+	}
+
+}
+
+
+```
+
+2. FileWriter
+
+```Java
+class FileTutorial {
+
+	public static void main(String[] args) throws IOException {
+
+		FileWriter reader = new FileWriter("c:\\test.txt"); // 텍스트 파일이 없으면 새로 생성함!
+
+				
+
+		reader.write("입출력!"); // 파일에 "입출력!"을 저장함.
+
+		reader.append('!'); // 파일의 끝에 ! 문자를 추가시킴.
+
+		reader.close(); // 파일을 닫음.
+
+	}
+
+}
+
+```
+
+3. FileInputStream
+
+```Java
+class FileTutorial {
+
+	public static void main(String[] args) throws IOException {
+
+		FileInputStream in = new FileInputStream("C:\\test.txt");
+
+		int ch;
+
+		while((ch = in.read()) != -1) { // 하나하나씩 받아오고 출력시킨다!
+
+			System.out.print((char)ch);
+
+		}
+
+		in.close(); // 파일을 닫음.
+
+	}
+
+}
+```
+
+4. FileOutputStream
+
+```Java
+class FileTutorial {
+
+	public static void main(String[] args) throws IOException {
+
+		FileOutputStream out = new FileOutputStream("C:\\test.txt", false);
+
+		// true로 두면 이어서 쓰고, false로 두면 새로 쓴다.
+
+		int ch;
+
+		for(int i = 'a'; i <= 'z'; i++) {  // a부터 z까지 파일에 입력한다!
+
+			out.write(i);
+
+		}
+
+		out.close(); // 파일을 닫음.
+
+	}
+
+}
+
+```
+
+- 보조 Stream이란 
+
+다른 스트림과 연결되어 여러 가지 편리한 기능으로 문자변환, 입출력 성능향상, 기본 데이터 타입 입출력, 객체 입출력등의 기능을 제공해 주는 스트림입니다.
+보조 스트림의 일부가 FilterInputStream, FilterOutputStream의 하위 클래스여서 필터(filter)스트림이라고도 합니다.
+보조 스트림은 자체적으로 입출력을 수행할 수 없기 때문에 입력소스와 바로 연결되는 스트림과 출력소스와 바로 연결이 되는 스트림등에 연결해서 입출력을 수행합니다.
+
+- Java Database Connectivity를 사용한 데이터베이스 연동
+- JDBC는 자바 프로그램과 관계형 데이터 원본에 대한 인터페이스이다. JDBC라이브러리는 관계형 데이터베이스에 접근하고, SQL 쿼리문을 실행하는 방법을 제공
+[JDBC 프로그램 작성단계](http://cfile27.uf.tistory.com/image/27669050526C94181B09CC) 
+
+1. 1단계 (JDBC 드라이버 Load)
+
+- 인터페이스 드라이버(interface driver)를 구현(implements)하는 작업으로, Class 클래스의 forName() 메소드를 사용해서 드라이버를 로드한다. forName(String className) 메소드는 분자열로 주어진 클래스나 인터페이스 이름을 객체로 리턴한다.
+
+- MySQL 드라이버 로딩
+
+```Java
+Class.forName("com.mysql.jdbc.Driver");
+```
+
+- Oracle 드라이버 로딩
+
+```Java
+Class.forName("oracle.jdbc.driver.OracleDriver");
+```
+- Class.forName("com.mysql.jdbc.Driver") 은 드라이버들이 읽히기만 하면 자동 객체가 생성되고 DriverManager에 등록된다. 드라이버 로딩은 프로그램 수행 시 한 번만 필요하다.
+
+
+
+2. 2단계 (Connection 객체 생성)
+
+- Connection 객체를 연결하는 것으로 DriverManager에 등록된 각 드라이버들을 getConnection(String url) 메소드를 사용해서 식별한다. 이때 url 식별자와 같은 것을 찾아서 매핑(mapping)한다. 찾지 못하면 no suitable error 가 발생한다.
+
+- MySQL 사용시 Connection 객체 생성
+
+```Java
+Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jsptest", "jspid","jsptest");
+```
+
+- Oracle 사용시 Connection 객체 생성
+
+```Java
+Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:ora817", "scott", "tiger");
+```
+
+
+3. 3단계 (Statement/PreparedStatement/CallableStatement 객체 생성)
+
+- sql 쿼리를 생성/실행하며, 반환된 결과를 가져오게 할 작업 영역을 제공한다.
+
+- Statement 객체는 Connection 객체의 createStatement() 메소드를 사용하여 생성된다.
+
+```Java
+Statement stmt = conn.createStatement();
+```
+
+4. 4단계 (Query 수행)
+
+- Statement 객체가 생성되면 Statement 객체의 executeQuery() 메소드나 executeUpdate() 메소드를 사용해서 쿼리를 처리한다.
+
+- stmt.executeQuery : recordSet 반환 => Select 문에서 사용
+
+```Java
+ResultSet rs = stmt.executeQuery("select * from 소속기관");
+```
+
+- stmt.executeUpdate() : 성공한 row 수 반환 => Insert문, Update문, Delete문에서 사용
+
+```Java
+String sql = "update member1 set passwd = '3579' where id ='abc'";
+stmt.executeUpdate(sql);
+```
+
+5. 5단계 (ResultSet 처리)
+
+- executeQuery() 메소드는 결과로 ResultSet을 반환한다. 이 ResultSet으로부터 원하는 데이터를 추출하는 과정을 말한다.
+
+- 데이터를 추출하는 방법은 ResultSet 에서 한 행씩 이동하면서 getXxx()를 이용해서 원하는 필드 값을 추출하는데, 이때 rs.getString("name") 혹은 rs.getString(1) 을 사용한다.
+
+- ResultSet의 첫 번째 필드는 1 부터 시작한다.
+
+- 한 행이 처리되고 다음 행으로 이동 시 next() 메소드를 사용한다.
+
+```Java
+while(rs.next()){
+
+out.println(rs.getString("id"));
+
+out.println(rs.getString("passwd");
+```
+}
+
+
+
+#### 출처: http://hyeonstorage.tistory.com/110 [개발이 하고 싶어요]
+#### 출처: http://codedragon.tistory.com/5482 [Code Dragon]
+#### 출처: http://blog.eairship.kr/127?category=431864 [누구나가 다 이해할 수 있는 프로그래밍 첫걸음]
 
 ## TODO
 
 - file관련 함수, DB관련 함수 및 사용하는 방법 익히기
 - MVC패턴 익숙해지는 연습 필요
+- 예외 상황시 나오는 메시지 알아두기(나중에 에러날시에 도움이 될듯함)
+- 보조 스트림에 대해 추가적인 공부 필요(성능향상시 필요)
+- DB 관련 문법 정리(RDBMS,NoSQL)
 
 
 ## Retrospect
